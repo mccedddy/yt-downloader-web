@@ -3,8 +3,30 @@ import { useState } from "react";
 export default function SearchBar({ setVideo }) {
   const [url, setUrl] = useState("");
 
-  const fetchVideo = (url) => {
-    setVideo("video details");
+  const fetchVideo = async (url) => {
+    try {
+      console.log("Fetching video...");
+
+      const response = await fetch("http://localhost:4000/fetch-video", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url }),
+      });
+
+      if (!response.ok) {
+        console.log("Error downloading the video");
+        return;
+      }
+
+      const videoInfo = await response.json();
+
+      console.log(videoInfo);
+      setVideo(videoInfo);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (

@@ -1,15 +1,33 @@
-export default function Result(video) {
+export default function Result(videoInfo) {
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+
+    if (hours > 0) {
+      return `${hours}:${String(minutes).padStart(2, "0")}:${String(
+        secs
+      ).padStart(2, "0")}`;
+    } else {
+      return `${minutes}:${String(secs).padStart(2, "0")}`;
+    }
+  };
+
   return (
     <div className="row container mt-3">
       <div className="col d-flex flex-column align-items-center">
         <img
-          src="https://pulsephotography.com.au/wp-content/uploads/2017/10/16x9-placeholder.jpg"
+          src={videoInfo.video.thumbnail}
           alt="thumbnail"
           style={{ maxWidth: "250px" }}
           className="mt-3"
         />
-        <h5 className="m-0 text-center mt-1">Title</h5>
-        <p className="m-0 text-center">00:00</p>
+        <p className="m-0 text-center text-wrap fw-bold mt-1">
+          {videoInfo.video.title}
+        </p>
+        <p className="m-0 text-center">
+          {formatTime(videoInfo.video.duration)}
+        </p>
       </div>
       <div className="col p-0">
         <table className="table table-sm table-bordered text-center align-middle mt-3">
