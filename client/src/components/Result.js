@@ -19,18 +19,16 @@ export default function Result(videoInfo) {
     ).values(),
   ];
 
-  // Function to extract numeric value from filesize string
   const parseFilesize = (sizeString) => {
-    const size = parseFloat(sizeString); // Extract the number from the string
-    return size; // Assuming it's all in MB, just return the number
+    const size = parseFloat(sizeString);
+    return size;
   };
 
-  // Sort uniqueFormats by file size in ascending order
   const sortedUniqueFormats = uniqueFormats.sort((a, b) => {
-    const sizeA = a.filesize ? parseFilesize(a.filesize) : 0; // Ensure filesize exists
-    const sizeB = b.filesize ? parseFilesize(b.filesize) : 0; // Ensure filesize exists
+    const sizeA = a.filesize ? parseFilesize(a.filesize) : 0;
+    const sizeB = b.filesize ? parseFilesize(b.filesize) : 0;
 
-    return sizeB - sizeA; // Ascending order
+    return sizeB - sizeA;
   });
 
   const handleDownload = (url) => {
