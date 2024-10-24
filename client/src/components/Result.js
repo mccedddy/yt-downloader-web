@@ -13,6 +13,30 @@ export default function Result(videoInfo) {
     }
   };
 
+  const uniqueFormats = [
+    ...new Map(
+      videoInfo.video.formats.map((format) => [format.quality, format])
+    ).values(),
+  ];
+
+  // Function to extract numeric value from filesize string
+  const parseFilesize = (sizeString) => {
+    const size = parseFloat(sizeString); // Extract the number from the string
+    return size; // Assuming it's all in MB, just return the number
+  };
+
+  // Sort uniqueFormats by file size in ascending order
+  const sortedUniqueFormats = uniqueFormats.sort((a, b) => {
+    const sizeA = a.filesize ? parseFilesize(a.filesize) : 0; // Ensure filesize exists
+    const sizeB = b.filesize ? parseFilesize(b.filesize) : 0; // Ensure filesize exists
+
+    return sizeB - sizeA; // Ascending order
+  });
+
+  const handleDownload = (url) => {
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="row container mt-3">
       <div className="col d-flex flex-column align-items-center">
@@ -39,13 +63,48 @@ export default function Result(videoInfo) {
             </tr>
           </thead>
           <tbody>
+            {sortedUniqueFormats
+              .filter((format) => format.mimeType.includes("video/mp4"))
+              .filter((format) => format.filesize.includes("MB"))
+              .map((format, index) => (
+                <tr key={index}>
+                  <td>{format.quality}</td>
+                  <td>{format.filesize}</td>
+                  <td>
+                    <button
+                      className="btn btn-sm btn-primary"
+                      onClick={() => handleDownload(format.url)}
+                    >
+                      Download
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+          <thead className="text-start">
             <tr>
-              <td>1080p</td>
-              <td>3 MB</td>
-              <td>
-                <button className="btn btn-sm btn-primary">Download</button>
-              </td>
+              <th colSpan={3} className="px-2">
+                Audio
+              </th>
             </tr>
+          </thead>
+          <tbody>
+            {sortedUniqueFormats
+              .filter((format) => format.mimeType.includes("audio"))
+              .map((format, index) => (
+                <tr key={index}>
+                  <td>MP3</td>
+                  <td>{format.filesize}</td>
+                  <td>
+                    <button
+                      className="btn btn-sm btn-primary"
+                      onClick={() => handleDownload(format.url)}
+                    >
+                      Download
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
