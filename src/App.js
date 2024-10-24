@@ -1,23 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import SearchBar from "./components/SearchBar";
+import Result from "./components/Result";
+import { useState } from "react";
 
 function App() {
+  const [video, setVideo] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container border d-flex flex-column justify-content-center align-items-center vh-100">
+      <h1 className="text-center mb-5">YouTube Downloader</h1>
+      <SearchBar setVideo={setVideo} />
+      {video && <Result video={video} />}
     </div>
   );
 }
