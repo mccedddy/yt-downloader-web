@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-export default function SearchBar({ setVideo }) {
+export default function SearchBar({ setVideo, setFetching }) {
   const [url, setUrl] = useState("");
 
   const fetchVideo = async (url) => {
     try {
+      setVideo(null);
+      setFetching(true);
       const response = await fetch("http://localhost:4000/fetch-video", {
         method: "POST",
         headers: {
@@ -20,6 +22,7 @@ export default function SearchBar({ setVideo }) {
 
       const videoInfo = await response.json();
 
+      setFetching(false);
       setVideo(videoInfo);
     } catch (error) {
       console.error("Error:", error);

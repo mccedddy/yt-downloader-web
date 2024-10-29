@@ -54,9 +54,9 @@ export default function Result({ videoInfo }) {
                 onClick={() => {
                   handleDownload(videoInfo.url, videoInfo.formats.audio.itag);
                 }}
-                className="btn btn-primary"
+                className="btn btn-outline-primary"
               >
-                Download MP3
+                Download
               </button>
             </div>
           </div>

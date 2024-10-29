@@ -24,7 +24,6 @@ app.post("/fetch-video", async (req, res) => {
 
     // Sanitize the title
     const videoTitle = info.videoDetails.title;
-    // const videoTitle = info.videoDetails.title.replace(/[^a-zA-Z0-9 ]/g, "");
 
     // MP3 formats only
     const mp3Format = info.formats.find(
