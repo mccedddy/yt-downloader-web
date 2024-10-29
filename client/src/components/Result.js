@@ -14,57 +14,53 @@ export default function Result({ videoInfo }) {
   };
 
   const handleDownload = (url, itag) => {
-    const downloadUrl = `http://localhost:4000/download?url=${encodeURIComponent(
-      url
-    )}&itag=${itag}`;
-    const anchor = document.createElement("a");
-    anchor.href = downloadUrl;
-    anchor.download = `${videoInfo.title}.mp3`;
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
+    try {
+      const downloadUrl = `http://localhost:4000/download?url=${encodeURIComponent(
+        url
+      )}&itag=${itag}`;
+      const anchor = document.createElement("a");
+      anchor.href = downloadUrl;
+      anchor.download = `${videoInfo.title}.mp3`;
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+    } catch (error) {
+      console.error(`Error: ${error}`);
+    }
   };
 
   return (
-    <div className="row container mt-3">
-      <div className="col d-flex flex-column align-items-center">
-        <img
-          src={videoInfo.thumbnail}
-          alt="thumbnail"
-          style={{ maxWidth: "250px" }}
-          className="mt-3"
-        />
-        <p className="m-0 text-center text-wrap fw-bold mt-1">
-          {videoInfo.title}
-        </p>
-        <p className="m-0 text-center">{formatTime(videoInfo.duration)}</p>
-      </div>
-      <div className="col p-0">
-        <table className="table table-sm table-bordered text-center align-middle mt-3">
-          <thead className="text-start">
-            <tr>
-              <th colSpan={3} className="px-2">
-                Audio
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{videoInfo.formats.audio.quality}</td>
-              <td>{videoInfo.formats.audio.filesize}</td>
-              <td>
-                <button
-                  className="btn btn-sm btn-primary"
-                  onClick={() =>
-                    handleDownload(videoInfo.url, videoInfo.formats.audio.itag)
-                  }
-                >
-                  Download
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div className="row w-100 justify-content-center my-4">
+      <div className="col-lg-4 col-md-6 col-sm-8">
+        <div className="card">
+          <img
+            src={videoInfo.thumbnail}
+            className="card-img-top"
+            alt="thumbnail"
+          ></img>
+          <div className="card-body">
+            <h5 className="card-title">{videoInfo.title}</h5>
+            <p className="card-text text-body-secondary ">
+              {formatTime(videoInfo.duration)}
+            </p>
+            <div className="input-group input-group-sm">
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                MP3
+              </span>
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                {videoInfo.formats.audio.filesize}
+              </span>
+              <button
+                onClick={() => {
+                  handleDownload(videoInfo.url, videoInfo.formats.audio.itag);
+                }}
+                className="btn btn-primary"
+              >
+                Download MP3
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

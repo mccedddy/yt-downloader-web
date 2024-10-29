@@ -23,7 +23,8 @@ app.post("/fetch-video", async (req, res) => {
     const info = await ytdl.getInfo(url);
 
     // Sanitize the title
-    const videoTitle = info.videoDetails.title.replace(/[^a-zA-Z0-9 ]/g, "");
+    const videoTitle = info.videoDetails.title;
+    // const videoTitle = info.videoDetails.title.replace(/[^a-zA-Z0-9 ]/g, "");
 
     // MP3 formats only
     const mp3Format = info.formats.find(
@@ -58,7 +59,7 @@ app.post("/fetch-video", async (req, res) => {
 // Download audio by itag
 app.get("/download", (req, res) => {
   const { url, itag } = req.query;
-  console.log(`Download received: ${itag} ${url}`);
+  console.log(`\nDownloading: ${itag} ${url}`);
 
   if (!ytdl.validateURL(url)) {
     return res.status(400).send("Invalid YouTube URL.");

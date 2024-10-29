@@ -5,7 +5,7 @@ import { useState } from "react";
 function App() {
   const [video, setVideo] = useState(null);
   return (
-    <div className="container border d-flex flex-column justify-content-center align-items-center vh-100">
+    <div className="container d-flex flex-column justify-content-center align-items-center mt-5 pt-5">
       <h1 className="text-center mb-5 fw-bolder">YouTube Downloader</h1>
       <SearchBar setVideo={setVideo} />
       {video && <Result videoInfo={video} />}
