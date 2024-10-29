@@ -8,7 +8,7 @@ function App() {
     <div className="container border d-flex flex-column justify-content-center align-items-center vh-100">
       <h1 className="text-center mb-5 fw-bolder">YouTube Downloader</h1>
       <SearchBar setVideo={setVideo} />
-      {video && <Result video={video} />}
+      {video && <Result videoInfo={video} />}
     </div>
   );
 }

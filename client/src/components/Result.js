@@ -1,4 +1,4 @@
-export default function Result(videoInfo) {
+export default function Result({ videoInfo }) {
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -13,72 +13,34 @@ export default function Result(videoInfo) {
     }
   };
 
-  const uniqueFormats = [
-    ...new Map(
-      videoInfo.video.formats.map((format) => [format.quality, format])
-    ).values(),
-  ];
-
-  const parseFilesize = (sizeString) => {
-    const size = parseFloat(sizeString);
-    return size;
-  };
-
-  const sortedUniqueFormats = uniqueFormats.sort((a, b) => {
-    const sizeA = a.filesize ? parseFilesize(a.filesize) : 0;
-    const sizeB = b.filesize ? parseFilesize(b.filesize) : 0;
-
-    return sizeB - sizeA;
-  });
-
-  const handleDownload = (url) => {
-    window.open(url, "_blank");
+  const handleDownload = (url, itag) => {
+    const downloadUrl = `http://localhost:4000/download?url=${encodeURIComponent(
+      url
+    )}&itag=${itag}`;
+    const anchor = document.createElement("a");
+    anchor.href = downloadUrl;
+    anchor.download = `${videoInfo.title}.mp3`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
   };
 
   return (
     <div className="row container mt-3">
       <div className="col d-flex flex-column align-items-center">
         <img
-          src={videoInfo.video.thumbnail}
+          src={videoInfo.thumbnail}
           alt="thumbnail"
           style={{ maxWidth: "250px" }}
           className="mt-3"
         />
         <p className="m-0 text-center text-wrap fw-bold mt-1">
-          {videoInfo.video.title}
+          {videoInfo.title}
         </p>
-        <p className="m-0 text-center">
-          {formatTime(videoInfo.video.duration)}
-        </p>
+        <p className="m-0 text-center">{formatTime(videoInfo.duration)}</p>
       </div>
       <div className="col p-0">
         <table className="table table-sm table-bordered text-center align-middle mt-3">
-          <thead className="text-start">
-            <tr>
-              <th colSpan={3} className="px-2">
-                Video
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedUniqueFormats
-              .filter((format) => format.mimeType.includes("video/mp4"))
-              .filter((format) => format.filesize.includes("MB"))
-              .map((format, index) => (
-                <tr key={index}>
-                  <td>{format.quality}</td>
-                  <td>{format.filesize}</td>
-                  <td>
-                    <button
-                      className="btn btn-sm btn-primary"
-                      onClick={() => handleDownload(format.url)}
-                    >
-                      Download
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
           <thead className="text-start">
             <tr>
               <th colSpan={3} className="px-2">
@@ -87,22 +49,20 @@ export default function Result(videoInfo) {
             </tr>
           </thead>
           <tbody>
-            {sortedUniqueFormats
-              .filter((format) => format.mimeType.includes("audio"))
-              .map((format, index) => (
-                <tr key={index}>
-                  <td>MP3</td>
-                  <td>{format.filesize}</td>
-                  <td>
-                    <button
-                      className="btn btn-sm btn-primary"
-                      onClick={() => handleDownload(format.url)}
-                    >
-                      Download
-                    </button>
-                  </td>
-                </tr>
-              ))}
+            <tr>
+              <td>{videoInfo.formats.audio.quality}</td>
+              <td>{videoInfo.formats.audio.filesize}</td>
+              <td>
+                <button
+                  className="btn btn-sm btn-primary"
+                  onClick={() =>
+                    handleDownload(videoInfo.url, videoInfo.formats.audio.itag)
+                  }
+                >
+                  Download
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
