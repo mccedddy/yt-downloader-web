@@ -1,11 +1,16 @@
 import { useState } from "react";
 
-export default function SearchBar({ setVideo, setFetching }) {
+export default function SearchBar({ setVideo, fetching, setFetching }) {
   const [url, setUrl] = useState("");
 
   const fetchVideo = async (url) => {
     if (!url) {
       console.error("No URL entered");
+      return;
+    }
+
+    if (fetching) {
+      console.error("Currently fetching");
       return;
     }
 
@@ -22,6 +27,7 @@ export default function SearchBar({ setVideo, setFetching }) {
 
       if (!response.ok) {
         console.error("Error fetching the video");
+        setFetching(false);
         return;
       }
 

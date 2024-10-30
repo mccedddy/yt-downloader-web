@@ -20,7 +20,11 @@ function App() {
           Downloader
         </h1>
       </div>
-      <SearchBar setVideo={setVideo} setFetching={setFetching} />
+      <SearchBar
+        setVideo={setVideo}
+        fetching={fetching}
+        setFetching={setFetching}
+      />
       {video && <Result videoInfo={video} />}
       {fetching && <div className="spinner my-5"></div>}
       <Info />
