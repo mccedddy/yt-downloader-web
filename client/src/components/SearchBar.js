@@ -5,12 +5,11 @@ export default function SearchBar({ setVideo, fetching, setFetching }) {
 
   const fetchVideo = async (url) => {
     if (!url) {
-      console.error("No URL entered");
+      console.log("No URL entered");
       return;
     }
 
     if (fetching) {
-      console.error("Currently fetching");
       return;
     }
 
