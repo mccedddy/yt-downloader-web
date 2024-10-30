@@ -4,9 +4,9 @@ import Info from "./components/Info";
 import Logo from "./assets/icons/logo.png";
 import { useState } from "react";
 
-function App() {
-  const [video, setVideo] = useState(null);
-  const [fetching, setFetching] = useState(false);
+function App({ initialVideo = null, initialFetching = false }) {
+  const [video, setVideo] = useState(initialVideo);
+  const [fetching, setFetching] = useState(initialFetching);
   return (
     <div className="d-flex flex-column justify-content-center align-items-center mt-5 pt-4">
       <div className="d-flex align-items-center mb-5">
@@ -26,9 +26,8 @@ function App() {
         setFetching={setFetching}
       />
       {video && <Result videoInfo={video} />}
-      {fetching && <div className="spinner my-5"></div>}
+      {fetching && <div className="spinner my-5" data-testid="spinner"></div>}
       <Info />
-      {/* {!video && !fetching && <Info />} */}
     </div>
   );
 }

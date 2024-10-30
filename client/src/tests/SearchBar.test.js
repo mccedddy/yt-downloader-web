@@ -23,10 +23,10 @@ describe("SearcBar component", () => {
         setFetching={mockSetFetching}
       />
     );
-    const inputElement = screen.getByPlaceholderText("Enter YouTube video URL");
+    const textbox = screen.getByPlaceholderText("Enter YouTube video URL");
     const searchButton = screen.getByRole("button", { name: "Search" });
 
-    expect(inputElement).toBeInTheDocument();
+    expect(textbox).toBeInTheDocument();
     expect(searchButton).toBeInTheDocument();
   });
 
@@ -38,9 +38,9 @@ describe("SearcBar component", () => {
         setFetching={mockSetFetching}
       />
     );
-    const inputElement = screen.getByPlaceholderText("Enter YouTube video URL");
+    const textbox = screen.getByPlaceholderText("Enter YouTube video URL");
 
-    expect(inputElement.value).toBe("");
+    expect(textbox.value).toBe("");
   });
 
   test("updates input value when typing", () => {
@@ -51,13 +51,13 @@ describe("SearcBar component", () => {
         setFetching={mockSetFetching}
       />
     );
-    const inputElement = screen.getByPlaceholderText("Enter YouTube video URL");
+    const textbox = screen.getByPlaceholderText("Enter YouTube video URL");
 
-    fireEvent.change(inputElement, {
+    fireEvent.change(textbox, {
       target: { value: "https://youtube.com/watch?v=test" },
     });
 
-    expect(inputElement.value).toBe("https://youtube.com/watch?v=test");
+    expect(textbox.value).toBe("https://youtube.com/watch?v=test");
   });
 
   test("calls fetchVideo function on button click", async () => {
@@ -76,10 +76,10 @@ describe("SearcBar component", () => {
       />
     );
 
-    const inputElement = screen.getByPlaceholderText("Enter YouTube video URL");
+    const textbox = screen.getByPlaceholderText("Enter YouTube video URL");
     const buttonElement = screen.getByRole("button", { name: "Search" });
 
-    fireEvent.change(inputElement, {
+    fireEvent.change(textbox, {
       target: { value: "https://youtube.com/watch?v=test" },
     });
     fireEvent.click(buttonElement);
