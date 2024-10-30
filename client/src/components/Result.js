@@ -54,7 +54,7 @@ export default function Result({ videoInfo }) {
                 onClick={() => {
                   handleDownload(videoInfo.url, videoInfo.formats.audio.itag);
                 }}
-                className="btn btn-outline-primary"
+                className="btn btn-outline-danger"
               >
                 Download
               </button>

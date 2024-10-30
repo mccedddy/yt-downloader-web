@@ -4,6 +4,11 @@ export default function SearchBar({ setVideo, setFetching }) {
   const [url, setUrl] = useState("");
 
   const fetchVideo = async (url) => {
+    if (!url) {
+      console.error("No URL entered");
+      return;
+    }
+
     try {
       setVideo(null);
       setFetching(true);
@@ -40,10 +45,11 @@ export default function SearchBar({ setVideo, setFetching }) {
             onChange={(e) => {
               setUrl(e.target.value);
             }}
+            style={{ outline: "none", boxShadow: "none" }}
           ></input>
           <button
             type="submit"
-            className="btn btn-outline-primary"
+            className="btn btn-outline-danger"
             onClick={() => {
               fetchVideo(url);
             }}

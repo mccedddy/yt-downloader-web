@@ -13,7 +13,7 @@ app.post("/fetch-video", async (req, res) => {
   const { url } = req.body;
   console.log(`\nReceived: ${url}`);
 
-  // Validate the YouTube URL
+  // Validate YouTube URL
   if (!ytdl.validateURL(url)) {
     console.error("Invalid YouTube URL");
     return res.status(400).json({ error: "Invalid YouTube URL" });
@@ -22,16 +22,13 @@ app.post("/fetch-video", async (req, res) => {
   try {
     const info = await ytdl.getInfo(url);
 
-    // Sanitize the title
-    const videoTitle = info.videoDetails.title;
-
     // MP3 formats only
     const mp3Format = info.formats.find(
       (format) => format.audioCodec && !format.videoCodec
     );
 
     const videoInfo = {
-      title: videoTitle,
+      title: info.videoDetails.title,
       duration: info.videoDetails.lengthSeconds,
       thumbnail: info.videoDetails.thumbnails.slice(-1)[0].url,
       url,
