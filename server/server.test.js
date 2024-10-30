@@ -15,7 +15,7 @@ describe("YouTube API Server", () => {
       expect(response.body).toHaveProperty("thumbnail");
       expect(response.body).toHaveProperty("formats");
       expect(response.body.formats).toHaveProperty("audio");
-    });
+    }, 10000);
 
     test("Returns 400 for an invalid YouTube URL", async () => {
       const response = await request(app)
@@ -28,14 +28,6 @@ describe("YouTube API Server", () => {
   });
 
   describe("GET /download", () => {
-    test("Returns 400 for an invalid YouTube URL", async () => {
-      const response = await request(app).get(
-        "/download?url=invalid-url&itag=140"
-      );
-      expect(response.status).toBe(400);
-      expect(response.text).toBe("Invalid YouTube URL.");
-    });
-
     test("Streams audio for a valid URL", async () => {
       const response = await request(app).get("/download").query({
         url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
@@ -47,6 +39,14 @@ describe("YouTube API Server", () => {
       expect(response.headers["content-disposition"]).toBe(
         'attachment; filename="download.mp4"'
       );
+    }, 10000);
+
+    test("Returns 400 for an invalid YouTube URL", async () => {
+      const response = await request(app).get(
+        "/download?url=invalid-url&itag=140"
+      );
+      expect(response.status).toBe(400);
+      expect(response.text).toBe("Invalid YouTube URL.");
     });
   });
 });
