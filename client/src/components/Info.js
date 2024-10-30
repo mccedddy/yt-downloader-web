@@ -23,7 +23,7 @@ export default function Info() {
                   rel="noopener noreferrer"
                   className="text-danger"
                 >
-                  YouTube.com
+                  YouTube
                 </a>
                 , find the video you want to download, and copy the URL from the
                 address bar.
