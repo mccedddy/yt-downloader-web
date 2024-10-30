@@ -42,7 +42,7 @@ export default function SearchBar({ setVideo, fetching, setFetching }) {
 
   return (
     <div className="row w-100 justify-content-center">
-      <div className="col-lg-6 col-md-9 col-sm-12">
+      <div className="col-lg-7 col-md-9 col-sm-12">
         <div className="input-group">
           <input
             type="text"
