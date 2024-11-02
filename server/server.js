@@ -54,7 +54,7 @@ app.post("/fetch-video", async (req, res) => {
 
 // Download audio by itag
 app.get("/download", (req, res) => {
-  const { url, itag } = req.query;
+  const { url, itag, title } = req.query;
   console.log(`\nDownloading: ${itag} ${url}`);
 
   if (!ytdl.validateURL(url)) {
@@ -62,7 +62,7 @@ app.get("/download", (req, res) => {
   }
 
   res.setHeader("Content-Type", "video/mp4");
-  res.setHeader("Content-Disposition", 'attachment; filename="download.mp4"');
+  res.setHeader("Content-Disposition", `attachment; filename="${title}.mp4"`);
 
   // Stream audio to client
   ytdl(url, {

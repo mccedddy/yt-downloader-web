@@ -14,7 +14,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -36,6 +38,8 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.2",
-    "@testing-library/react": "^16.0.1"
-  }
+    "@testing-library/react": "^16.0.1",
+    "gh-pages": "^6.2.0"
+  },
+  "homepage": "https://mccedddy.github.io/yt-mp3-downloader"
 }
