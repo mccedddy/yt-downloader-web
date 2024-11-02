@@ -52,7 +52,11 @@ export default function Result({ videoInfo }) {
               </span>
               <button
                 onClick={() => {
-                  handleDownload(videoInfo.url, videoInfo.formats.audio.itag);
+                  handleDownload(
+                    videoInfo.url,
+                    videoInfo.formats.audio.itag,
+                    videoInfo.title
+                  );
                 }}
                 className="btn btn-outline-danger"
               >
