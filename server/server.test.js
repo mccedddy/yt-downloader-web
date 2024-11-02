@@ -32,12 +32,13 @@ describe("YouTube API Server", () => {
       const response = await request(app).get("/download").query({
         url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         itag: "140",
+        title: "VideoTitle",
       });
 
       expect(response.status).toBe(200);
       expect(response.headers["content-type"]).toBe("video/mp4");
       expect(response.headers["content-disposition"]).toBe(
-        'attachment; filename="download.mp4"'
+        'attachment; filename="VideoTitle.mp4"'
       );
     }, 10000);
 

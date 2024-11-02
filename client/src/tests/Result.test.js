@@ -72,7 +72,9 @@ describe("Result component", () => {
     expect(anchorElement.href).toBe(
       `http://localhost:4000/download?url=${encodeURIComponent(
         mockVideo.url
-      )}&itag=${mockVideo.formats.audio.itag}`
+      )}&itag=${mockVideo.formats.audio.itag}&title=${encodeURIComponent(
+        mockVideo.title
+      )}`
     );
 
     // Remove anchor from the body
