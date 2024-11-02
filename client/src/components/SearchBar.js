@@ -36,6 +36,7 @@ export default function SearchBar({ setVideo, fetching, setFetching }) {
       setVideo(videoInfo);
     } catch (error) {
       console.error("Error:", error);
+      setFetching(false);
     }
   };
 
