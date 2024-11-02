@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/yt-mp3-downloader/static/css/main.e96f29bf.css",
-    "main.js": "/yt-mp3-downloader/static/js/main.24582124.js",
+    "main.js": "/yt-mp3-downloader/static/js/main.af3a7f59.js",
     "static/js/453.434cd866.chunk.js": "/yt-mp3-downloader/static/js/453.434cd866.chunk.js",
     "static/media/logo.png": "/yt-mp3-downloader/static/media/logo.a42c9d8669a6051948f2.png",
     "index.html": "/yt-mp3-downloader/index.html",
     "main.e96f29bf.css.map": "/yt-mp3-downloader/static/css/main.e96f29bf.css.map",
-    "main.24582124.js.map": "/yt-mp3-downloader/static/js/main.24582124.js.map",
+    "main.af3a7f59.js.map": "/yt-mp3-downloader/static/js/main.af3a7f59.js.map",
     "453.434cd866.chunk.js.map": "/yt-mp3-downloader/static/js/453.434cd866.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e96f29bf.css",
-    "static/js/main.24582124.js"
+    "static/js/main.af3a7f59.js"
   ]
 }
