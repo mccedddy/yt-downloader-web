@@ -17,7 +17,7 @@ export default function Result({ videoInfo }) {
     try {
       const downloadUrl = `http://localhost:4000/download?url=${encodeURIComponent(
         url
-      )}&itag=${itag}&title=${title}`;
+      )}&itag=${itag}&title=${encodeURIComponent(title)}`;
       const anchor = document.createElement("a");
       anchor.href = downloadUrl;
       anchor.download = `${videoInfo.title}.mp3`;

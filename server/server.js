@@ -55,7 +55,7 @@ app.post("/fetch-video", async (req, res) => {
 // Download audio by itag
 app.get("/download", (req, res) => {
   const { url, itag, title } = req.query;
-  console.log(`\nDownloading: ${itag} ${url}`);
+  console.log(`\nDownloading: ${itag} ${url} ${title}`);
 
   if (!ytdl.validateURL(url)) {
     return res.status(400).send("Invalid YouTube URL.");
