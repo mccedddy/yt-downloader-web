@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
+import { VideoInfo } from "../types";
 
-export default function SearchBar({ setVideo, fetching, setFetching }) {
-  const [url, setUrl] = useState("");
+type SearchBarProps = {
+  setVideo: Dispatch<SetStateAction<VideoInfo | null>>;
+  fetching: boolean;
+  setFetching: Dispatch<SetStateAction<boolean>>;
+};
 
-  const fetchVideo = async (url) => {
+export default function SearchBar({
+  setVideo,
+  fetching,
+  setFetching,
+}: SearchBarProps) {
+  const [url, setUrl] = useState<string>("");
+
+  const fetchVideo = async (url: string) => {
     if (!url) {
       console.log("No URL entered");
       return;

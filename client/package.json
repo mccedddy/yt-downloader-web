@@ -39,7 +39,10 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
-    "gh-pages": "^6.2.0"
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "gh-pages": "^6.2.0",
+    "typescript": "^5.6.3"
   },
   "homepage": "https://mccedddy.github.io/yt-mp3-downloader"
 }

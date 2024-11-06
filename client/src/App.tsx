@@ -2,10 +2,16 @@ import SearchBar from "./components/SearchBar";
 import Result from "./components/Result";
 import Info from "./components/Info";
 import Logo from "./assets/icons/logo.png";
+import { VideoInfo } from "./types";
 import { useState } from "react";
 
-function App({ initialVideo = null, initialFetching = false }) {
-  const [video, setVideo] = useState(initialVideo);
+type AppProps = {
+  initialVideo: VideoInfo | null;
+  initialFetching: boolean;
+};
+
+function App({ initialVideo = null, initialFetching = false }: AppProps) {
+  const [video, setVideo] = useState<VideoInfo | null>(initialVideo);
   const [fetching, setFetching] = useState(initialFetching);
   return (
     <div className="d-flex flex-column justify-content-center align-items-center mt-5 pt-4">

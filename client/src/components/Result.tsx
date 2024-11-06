@@ -1,5 +1,11 @@
-export default function Result({ videoInfo }) {
-  const formatTime = (seconds) => {
+import { VideoInfo } from "../types";
+
+type ResultProps = {
+  videoInfo: VideoInfo;
+};
+
+export default function Result({ videoInfo }: ResultProps) {
+  const formatTime = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -13,7 +19,7 @@ export default function Result({ videoInfo }) {
     }
   };
 
-  const handleDownload = (url, itag, title) => {
+  const handleDownload = (url: string, itag: string, title: string) => {
     try {
       const downloadUrl = `http://localhost:4000/download?url=${encodeURIComponent(
         url
