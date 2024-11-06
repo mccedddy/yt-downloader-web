@@ -61,8 +61,8 @@ app.get("/download", (req, res) => {
     return res.status(400).send("Invalid YouTube URL.");
   }
 
-  res.setHeader("Content-Type", "video/mp4");
-  res.setHeader("Content-Disposition", `attachment; filename="${title}.mp4"`);
+  res.setHeader("Content-Type", "audio/mp3");
+  res.setHeader("Content-Disposition", `attachment; filename="${title}.mp3"`);
 
   // Stream audio to client
   ytdl(url, {

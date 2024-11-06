@@ -36,9 +36,9 @@ describe("YouTube API Server", () => {
       });
 
       expect(response.status).toBe(200);
-      expect(response.headers["content-type"]).toBe("video/mp4");
+      expect(response.headers["content-type"]).toBe("audio/mp3");
       expect(response.headers["content-disposition"]).toBe(
-        'attachment; filename="VideoTitle.mp4"'
+        'attachment; filename="VideoTitle.mp3"'
       );
     }, 10000);
 
